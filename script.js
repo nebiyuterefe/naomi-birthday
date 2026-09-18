@@ -286,7 +286,7 @@ function buildGallery() {
     const card = document.createElement("div");
     card.className = "polaroid";
     const el = mediaEl(m.src, "media");
-    el.addEventListener("error", () => card.remove());
+    
     el.addEventListener("click", () => openLightbox(m.src, m.caption));
     if (isVideo(m.src)) {
       el.addEventListener("click", () => { el.muted = false; el.controls = true; openLightbox(m.src, m.caption); }, { once: true });
@@ -458,7 +458,7 @@ function buildScreenshots() {
     const card = document.createElement("div");
     card.className = "polaroid";
     const el = mediaEl(m.src, "media");
-    el.addEventListener("error", () => card.remove());
+   
     el.addEventListener("click", () => openLightbox(m.src, m.caption));
     const cap = document.createElement("p");
     cap.className = "card-caption";
