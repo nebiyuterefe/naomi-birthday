@@ -44,14 +44,28 @@
 
   <section class="section" id="gallery">
     <h2>Our Memories 📸</h2>
-    <p class="section-note">Tap any card to view it. Use “save this” to keep it forever.</p>
+    <p class="section-note">Tap a month to browse. Tap any card to view it.</p>
+    <div class="month-tabs" id="month-tabs"></div>
     <div class="gallery" id="gallery-grid"></div>
 
     <div class="add-memory">
       <p class="add-note">Want to look at newer photos or videos right now? Pick them from your device to view them here.</p>
-      <p class="add-note warn"><strong>Just for this visit:</strong> these stay on your device only — they don’t travel with the link. To keep a memory forever, send it to me and I’ll add it to the gift.</p>
+      <p class="add-note warn"><strong>Just for this visit:</strong> these stay on your device only — they don't travel with the link. To keep a memory forever, send it to me and I'll add it to the gift.</p>
       <input type="file" id="memoryInput" accept="image/*,video/*" multiple class="visually-hidden">
       <label class="btn add-btn" for="memoryInput">+ view photos from this device</label>
+    </div>
+  </section>
+
+  <section class="section" id="screenshots-section">
+    <h2>Screenshots 🖼️</h2>
+    <p class="section-note">Fun screenshots, chats, and little things worth saving.</p>
+    <div class="month-tabs" id="ss-month-tabs"></div>
+    <div class="gallery" id="ss-grid"></div>
+
+    <div class="add-memory">
+      <input type="file" id="ssInput" accept="image/*" multiple class="visually-hidden">
+      <label class="btn add-btn" for="ssInput">+ view screenshots from this device</label>
+      <p class="add-note warn"><strong>Just for this visit:</strong> these stay on your device only.</p>
     </div>
   </section>
 

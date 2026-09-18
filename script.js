@@ -22,18 +22,44 @@ const CONFIG = {
 };
 
 /* ==================================================
-   MEMORIES - one line per photo/video.
+   MEMORIES - organized by month, then by date.
    Put files in the "images" folder, then add:
-     { src: "images/photo1.jpg", caption: "that day" },
+     { src: "images/photo1.jpg", date: "2026-04-12", caption: "that day", note: "describe the moment" },
    Videos work too: "images/video1.mp4"
    ================================================== */
 
-const MEMORIES = [
-  { src: "images/photo1.jpg", caption: "write a caption here" },
-  { src: "images/photo2.jpg", caption: "write a caption here" },
-  { src: "images/photo3.jpg", caption: "write a caption here" },
-  { src: "images/video1.mp4", caption: "a video memory" },
+const MONTHS = [
+  { key: "april",      label: "April" },
+  { key: "may",        label: "May" },
+  { key: "june",       label: "June" },
+  { key: "july",       label: "July" },
+  { key: "august",     label: "August" },
+  { key: "september",  label: "September" },
+  { key: "october",    label: "October" },
 ];
+
+const MEMORIES = {
+  april: [],
+  may: [],
+  june: [],
+  july: [],
+  august: [],
+  september: [],
+  october: [],
+};
+
+const SCREENSHOTS = {
+  april: [],
+  may: [],
+  june: [],
+  july: [],
+  august: [],
+  september: [],
+  october: [],
+};
+
+let selectedMonth = "april";
+let ssSelectedMonth = "april";
 
 /* ---------- everything below just works ---------- */
 
@@ -123,8 +149,8 @@ document.title = "For " + CONFIG.herName + " \uD83C\uDF82";
 
 /* ---------- memories gallery ---------- */
 
-function mediaEl(src, cls) {
-  if (isVideo(src)) {
+function mediaEl(src, cls, type) {
+  if (type === "video" || isVideo(src)) {
     const v = document.createElement("video");
     v.src = src; v.className = cls; v.preload = "metadata"; v.playsInline = true; v.muted = true;
     return v;
@@ -134,10 +160,41 @@ function mediaEl(src, cls) {
   return img;
 }
 
+function buildMonthTabs() {
+  const tabs = $("month-tabs");
+  tabs.innerHTML = "";
+  MONTHS.forEach((m) => {
+    const btn = document.createElement("button");
+    btn.className = "month-tab" + (m.key === selectedMonth ? " active" : "");
+    btn.textContent = m.label;
+    btn.addEventListener("click", () => {
+      selectedMonth = m.key;
+      document.querySelectorAll(".month-tab").forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      buildGallery();
+    });
+    tabs.appendChild(btn);
+  });
+}
+
 function buildGallery() {
   const grid = $("gallery-grid");
   grid.innerHTML = "";
-  MEMORIES.forEach((m) => {
+  const list = (MEMORIES[selectedMonth] || []).slice().sort((a, b) => a.date.localeCompare(b.date));
+  if (!list.length) {
+    grid.innerHTML = '<p class="empty-note">No memories in this month yet.</p>';
+    return;
+  }
+  let lastDate = "";
+  list.forEach((m, idx) => {
+    const dateLabel = formatDate(m.date);
+    if (dateLabel !== lastDate) {
+      const heading = document.createElement("h3");
+      heading.className = "date-heading";
+      heading.textContent = dateLabel;
+      grid.appendChild(heading);
+      lastDate = dateLabel;
+    }
     const card = document.createElement("div");
     card.className = "polaroid";
     const el = mediaEl(m.src, "media");
@@ -147,23 +204,38 @@ function buildGallery() {
       el.addEventListener("click", () => { el.muted = false; el.controls = true; openLightbox(m.src, m.caption); }, { once: true });
     }
     const cap = document.createElement("p");
+    cap.className = "card-caption";
     cap.textContent = m.caption;
     const dl = document.createElement("a");
     dl.className = "dl"; dl.href = m.src; dl.download = ""; dl.textContent = "\u2B07 save this";
     card.append(el, cap, dl);
+    if (!m.local) {
+      const noteArea = document.createElement("div");
+      noteArea.className = "card-note";
+      const noteKey = "note_" + selectedMonth + "_" + idx;
+      const saved = localStorage.getItem(noteKey) || m.note || "";
+      const ta = document.createElement("textarea");
+      ta.className = "note-input";
+      ta.placeholder = "describe this moment...";
+      ta.value = saved;
+      ta.addEventListener("input", () => { localStorage.setItem(noteKey, ta.value); });
+      const saveHint = document.createElement("span");
+      saveHint.className = "save-hint";
+      saveHint.textContent = "saved on your device";
+      noteArea.append(ta, saveHint);
+      card.appendChild(noteArea);
+    }
     grid.appendChild(card);
   });
-  showEmptyIfNone();
 }
 
-function showEmptyIfNone() {
-  const grid = $("gallery-grid");
-  if (!grid.querySelector(".polaroid") && !grid.querySelector(".empty-note")) {
-    grid.innerHTML = '<p class="empty-note">No memories added yet - drop photos into the "images" folder to fill this.</p>';
-  }
+function formatDate(iso) {
+  const [y, m, d] = iso.split("-");
+  const dt = new Date(Number(y), Number(m) - 1, Number(d));
+  return dt.toLocaleDateString("en-US", { month: "long", day: "numeric" });
 }
 
-window.addEventListener("load", showEmptyIfNone);
+buildMonthTabs();
 buildGallery();
 
 /* ---------- add memories from this device (view only) ---------- */
@@ -173,8 +245,9 @@ $("memoryInput").addEventListener("change", (e) => {
   files.forEach((f) => {
     const url = URL.createObjectURL(f);
     const cap = f.type.startsWith("video") ? "from your device (view only)" : "view only - on this device";
-    MEMORIES.push({ src: url, caption: cap, local: true });
-    const card = $("gallery-grid").lastElementChild;
+    const today = new Date().toISOString().slice(0, 10);
+    if (!MEMORIES[selectedMonth]) MEMORIES[selectedMonth] = [];
+    MEMORIES[selectedMonth].push({ src: url, caption: cap, local: true, date: today });
   });
   buildGallery();
   e.target.value = "";
@@ -203,7 +276,9 @@ let lbList = [];
 let lbIndex = 0;
 
 function openLightbox(src, caption) {
-  lbList = MEMORIES.filter((m) => !m.local);
+  const allMems = [];
+  Object.values(MEMORIES).forEach((arr) => allMems.push(...arr));
+  lbList = allMems.filter((m) => !m.local).sort((a, b) => a.date.localeCompare(b.date));
   lbIndex = Math.max(0, lbList.findIndex((m) => m.src === src));
   renderLightbox();
   $("lightbox").hidden = false;
@@ -243,6 +318,75 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "ArrowLeft") lbStep(-1);
   if (e.key === "ArrowRight") lbStep(1);
 });
+
+/* ---------- screenshots section ---------- */
+
+function buildSSMonthTabs() {
+  const tabs = $("ss-month-tabs");
+  if (!tabs) return;
+  tabs.innerHTML = "";
+  MONTHS.forEach((m) => {
+    const btn = document.createElement("button");
+    btn.className = "month-tab" + (m.key === ssSelectedMonth ? " active" : "");
+    btn.textContent = m.label;
+    btn.addEventListener("click", () => {
+      ssSelectedMonth = m.key;
+      tabs.querySelectorAll(".month-tab").forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      buildScreenshots();
+    });
+    tabs.appendChild(btn);
+  });
+}
+
+function buildScreenshots() {
+  const grid = $("ss-grid");
+  if (!grid) return;
+  grid.innerHTML = "";
+  const list = (SCREENSHOTS[ssSelectedMonth] || []).slice().sort((a, b) => a.date.localeCompare(b.date));
+  if (!list.length) {
+    grid.innerHTML = '<p class="empty-note">No screenshots in this month yet.</p>';
+    return;
+  }
+  let lastDate = "";
+  list.forEach((m) => {
+    const dateLabel = formatDate(m.date);
+    if (dateLabel !== lastDate) {
+      const heading = document.createElement("h3");
+      heading.className = "date-heading";
+      heading.textContent = dateLabel;
+      grid.appendChild(heading);
+      lastDate = dateLabel;
+    }
+    const card = document.createElement("div");
+    card.className = "polaroid";
+    const el = mediaEl(m.src, "media");
+    el.addEventListener("error", () => card.remove());
+    el.addEventListener("click", () => openLightbox(m.src, m.caption));
+    const cap = document.createElement("p");
+    cap.className = "card-caption";
+    cap.textContent = m.caption;
+    const dl = document.createElement("a");
+    dl.className = "dl"; dl.href = m.src; dl.download = ""; dl.textContent = "\u2B07 save this";
+    card.append(el, cap, dl);
+    grid.appendChild(card);
+  });
+}
+
+$("ssInput").addEventListener("change", (e) => {
+  const files = [...e.target.files];
+  files.forEach((f) => {
+    const url = URL.createObjectURL(f);
+    const today = new Date().toISOString().slice(0, 10);
+    if (!SCREENSHOTS[ssSelectedMonth]) SCREENSHOTS[ssSelectedMonth] = [];
+    SCREENSHOTS[ssSelectedMonth].push({ src: url, caption: "screenshot", local: true, date: today });
+  });
+  buildScreenshots();
+  e.target.value = "";
+});
+
+buildSSMonthTabs();
+buildScreenshots();
 
 /* ---------- countdown ---------- */
 

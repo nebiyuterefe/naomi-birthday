@@ -3,10 +3,19 @@
 
 body {
   font-family: Georgia, "Times New Roman", serif;
-  background: linear-gradient(160deg, #fff6ec 0%, #ffe9d6 40%, #ffd9e8 100%);
+  background: #2a1a10 url("images/background.jpg") center top/cover no-repeat;
+  background-attachment: scroll;
   color: #5a4232;
   min-height: 100vh;
   overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255,246,236,0.35) 0%, rgba(255,233,214,0.30) 50%, rgba(255,217,232,0.35) 100%);
+  z-index: -1;
 }
 h1, h2 { font-weight: normal; }
 
@@ -19,6 +28,7 @@ h1, h2 { font-weight: normal; }
   text-align: center;
   padding: 2rem;
   position: relative;
+  background: rgba(255, 246, 236, 0.25);
 }
 
 .small-top {
@@ -133,6 +143,38 @@ h1, h2 { font-weight: normal; }
 }
 
 .polaroid .dl:hover { text-decoration: underline; }
+
+.card-note {
+  padding: 0 0 0.3rem;
+}
+
+.note-input {
+  width: 100%;
+  font-family: inherit;
+  font-size: 0.85rem;
+  color: #6b4a35;
+  background: rgba(243, 228, 211, 0.5);
+  border: 1px solid #e3c8b4;
+  border-radius: 8px;
+  padding: 0.5rem 0.6rem;
+  resize: vertical;
+  min-height: 48px;
+  max-height: 140px;
+  line-height: 1.5;
+  transition: border-color 0.2s;
+}
+
+.note-input:focus { outline: none; border-color: #d16a7c; }
+
+.note-input::placeholder { color: #b09a84; font-style: italic; }
+
+.save-hint {
+  display: block;
+  font-size: 0.72rem;
+  color: #b09a84;
+  font-style: italic;
+  padding: 0.15rem 0.2rem 0;
+}
 
 .add-memory {
   margin-top: 2.5rem;
@@ -468,7 +510,49 @@ footer {
 
 .lb-close:hover, .lb-nav:hover { color: #fff; }
 
+.month-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.month-tab {
+  font-family: inherit;
+  font-size: 0.95rem;
+  padding: 0.5rem 1.2rem;
+  border: 1px solid #e3c8b4;
+  border-radius: 999px;
+  background: rgba(255, 253, 248, 0.85);
+  color: #7a4a32;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+.month-tab:hover {
+  background: #f3d9c4;
+  box-shadow: 0 4px 12px rgba(122, 74, 50, 0.15);
+}
+
+.month-tab.active {
+  background: #d16a7c;
+  color: #fff8f2;
+  border-color: #d16a7c;
+  box-shadow: 0 4px 14px rgba(209, 106, 124, 0.35);
+}
+
+.date-heading {
+  font-size: 1.1rem;
+  color: #b07a5a;
+  font-style: italic;
+  text-align: center;
+  margin: 1.4rem 0 0.4rem;
+  grid-column: 1 / -1;
+}
+
 @media (max-width: 600px) {
   .letter-card { padding: 1.8rem 1.4rem; }
   .lb-nav { font-size: 2rem; }
+  .month-tab { font-size: 0.85rem; padding: 0.4rem 0.9rem; }
 }
