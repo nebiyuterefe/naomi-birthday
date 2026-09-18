@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You 🎂</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============================================ -->
+<!--  HOW TO EDIT                                 -->
+<!--  1. Question + birthday: open script.js and  -->
+<!--     edit the CONFIG at the top.              -->
+<!--  2. Photos/videos: put files in the "images" -->
+<!--     folder, then add them to the MEMORIES    -->
+<!--     list in script.js.                       -->
+<!--  3. Letter: edit the LETTER text in          -->
+<!--     script.js.                               -->
+<!-- ============================================ -->
+
+<!-- QUESTION GATE -->
+<div class="gate" id="gate">
+  <div class="gate-card">
+    <div class="gate-icon">🔒</div>
+    <h1>This one is only for you</h1>
+    <p class="gate-hint">Answer the question to open your gift.</p>
+    <p class="gate-question" id="gateQuestion"></p>
+    <input type="text" id="gateAnswer" placeholder="your answer..." autocomplete="off">
+    <button class="btn" id="gateBtn">Open 💌</button>
+    <p class="gate-error" id="gateError" role="alert"></p>
+  </div>
+  <p class="gate-credit">a little corner of the internet, made for you</p>
+  <div class="gate-hearts" id="gateHearts"></div>
+</div>
+
+<main id="gift" hidden>
+  <section class="hero">
+    <p class="small-top">a little corner of the internet, made for you</p>
+    <h1>Happy Birthday, <span class="name" id="heroName">Friend</span>!</h1>
+    <p class="subtitle">Some things are too big for a text message, so I made you this.</p>
+    <button class="btn" id="openGiftBtn">Open your gift 🎁</button>
+  </section>
+
+  <section class="section" id="gallery">
+    <h2>Our Memories 📸</h2>
+    <p class="section-note">Tap a month to browse. Tap any card to view it.</p>
+    <div class="month-tabs" id="month-tabs"></div>
+    <div class="gallery" id="gallery-grid"></div>
+
+    <div class="add-memory">
+      <p class="add-note">Want to look at newer photos or videos right now? Pick them from your device to view them here.</p>
+      <p class="add-note warn"><strong>Just for this visit:</strong> these stay on your device only — they don't travel with the link. To keep a memory forever, send it to me and I'll add it to the gift.</p>
+      <input type="file" id="memoryInput" accept="image/*,video/*" multiple class="visually-hidden">
+      <label class="btn add-btn" for="memoryInput">+ view photos from this device</label>
+    </div>
+  </section>
+
+  <section class="section" id="screenshots-section">
+    <h2>Screenshots 🖼️</h2>
+    <p class="section-note">Fun screenshots, chats, and little things worth saving.</p>
+    <div class="month-tabs" id="ss-month-tabs"></div>
+    <div class="gallery" id="ss-grid"></div>
+
+    <div class="add-memory">
+      <input type="file" id="ssInput" accept="image/*" multiple class="visually-hidden">
+      <label class="btn add-btn" for="ssInput">+ view screenshots from this device</label>
+      <p class="add-note warn"><strong>Just for this visit:</strong> these stay on your device only.</p>
+    </div>
+  </section>
+
+  <!-- ENVELOPE LETTER -->
+  <section class="section letter-section">
+    <h2>A Letter For You 💌</h2>
+    <div class="envelope-wrap">
+      <div class="envelope" id="envelope" tabindex="0" role="button" aria-label="Open the letter">
+        <div class="envelope-back"></div>
+        <div class="letter-mini">💌</div>
+        <div class="envelope-front"></div>
+        <div class="envelope-flap"></div>
+      </div>
+      <p class="envelope-hint">Tap the envelope to open it.</p>
+    </div>
+    <div class="letter-card" id="letterCard" hidden></div>
+  </section>
+
+  <footer>
+    <p>made with ❤ just for you · <span id="countdown"></span></p>
+  </footer>
+</main>
+
+<div class="hearts" id="hearts"></div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" hidden>
+  <button class="lb-close" id="lbClose" aria-label="Close">✕</button>
+  <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous">‹</button>
+  <button class="lb-nav lb-next" id="lbNext" aria-label="Next">›</button>
+  <div class="lb-stage">
+    <div class="lb-media" id="lbMedia"></div>
+    <p class="lb-caption" id="lbCaption"></p>
+    <a class="btn lb-dl" id="lbDl" href="#" download>⬇ save this</a>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
