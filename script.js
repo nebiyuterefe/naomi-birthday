@@ -3,21 +3,30 @@
    ================================================== */
 
 const CONFIG = {
-  herName: "Naomi",
-  yourName: "Your Name",
+  herName: "Nuhamin Amanuel",
+  yourName: "Neba",
 
   // The question she must answer to open the gift.
-  gateQuestion: "What is the name of the first place we met?",
-  gateAnswers: ["school", "the school"],
+  gateQuestion: "What was our last moment in person?",
+  gateAnswers: ["bus"],
 
   // Her birthday: YYYY-MM-DD (used for the countdown).
-  birthday: "2026-10-17",
+  birthday: "2026-10-19",
 
   // Your letter. Each line in quotes is one paragraph.
   letter: [
-    "Dear Naomi,",
-    "Write your birthday letter here. Tell her what she means to you, a favorite memory, an inside joke, or something you hope for her new year.",
-    "Add as many paragraphs as you want - just add another line.",
+    "To Nuhamin Amanuel,",
+    "",
+    "There are people who walk into your life quietly, and somehow make everything brighter just by being in it.",
+    "",
+    "You are one of those people, Naomi.",
+    "",
+    "This past year — every laugh, every adventure, every late-night conversation — has meant the world to me.",
+    "",
+    "I hope this birthday is the beginning of your most beautiful year yet.",
+    "You deserve every single good thing that is coming your way. 🌟",
+    "",
+    "Happy Birthday. I love you, always. 💜",
   ],
 };
 
@@ -39,27 +48,97 @@ const MONTHS = [
 ];
 
 const MEMORIES = {
-  april: [],
-  may: [],
-  june: [],
-  july: [],
-  august: [],
+  april: [
+    { src: "images/april/24.mp4", date: "2026-04-24", caption: "video" },
+    { src: "images/april/25.mp4", date: "2026-04-25", caption: "video" },
+    { src: "images/april/27.1.mp4", date: "2026-04-27", caption: "video" },
+    { src: "images/april/27.2.mp4", date: "2026-04-27", caption: "video" },
+    { src: "images/april/27.3.mp4", date: "2026-04-27", caption: "video" },
+    { src: "images/april/27.4.mp4", date: "2026-04-27", caption: "video" },
+    { src: "images/april/28.mp4", date: "2026-04-28", caption: "video" },
+    { src: "images/april/29.mp4", date: "2026-04-29", caption: "video" },
+    { src: "images/april/30.1.mp4", date: "2026-04-30", caption: "video" },
+    { src: "images/april/30.2.mp4", date: "2026-04-30", caption: "video" },
+  ],
+  may: [
+    { src: "images/may/1.2.mp4", date: "2026-05-01", caption: "video" },
+    { src: "images/may/1.3.mp4", date: "2026-05-01", caption: "video" },
+    { src: "images/may/1.4.mp4", date: "2026-05-01", caption: "video" },
+    { src: "images/may/2.mp4", date: "2026-05-02", caption: "video" },
+    { src: "images/may/5.mp4", date: "2026-05-05", caption: "video" },
+    { src: "images/may/5.2.mp4", date: "2026-05-05", caption: "video" },
+    { src: "images/may/6.mp4", date: "2026-05-06", caption: "video" },
+    { src: "images/may/6.1.jpg", date: "2026-05-06", caption: "photo" },
+    { src: "images/may/6.2.mp4", date: "2026-05-06", caption: "video" },
+    { src: "images/may/6.3.mp4", date: "2026-05-06", caption: "video" },
+    { src: "images/may/6.5.mp4", date: "2026-05-06", caption: "video" },
+    { src: "images/may/6.7.mp4", date: "2026-05-06", caption: "video" },
+    { src: "images/may/10.mp4", date: "2026-05-10", caption: "video" },
+    { src: "images/may/10.2.mp4", date: "2026-05-10", caption: "video" },
+    { src: "images/may/10.3.mp4", date: "2026-05-10", caption: "video" },
+    { src: "images/may/11.mp4", date: "2026-05-11", caption: "video" },
+    { src: "images/may/11.2.mp4", date: "2026-05-11", caption: "video" },
+    { src: "images/may/14.mp4", date: "2026-05-14", caption: "video" },
+    { src: "images/may/14.2.mp4", date: "2026-05-14", caption: "video" },
+    { src: "images/may/18.mp4", date: "2026-05-18", caption: "video" },
+    { src: "images/may/19.mp4", date: "2026-05-19", caption: "video" },
+    { src: "images/may/23.mp4", date: "2026-05-23", caption: "video" },
+    { src: "images/may/23.2.mp4", date: "2026-05-23", caption: "video" },
+    { src: "images/may/30.mp4", date: "2026-05-30", caption: "video" },
+    { src: "images/may/30.2.mp4", date: "2026-05-30", caption: "video" },
+    { src: "images/may/30.3.mp4", date: "2026-05-30", caption: "video" },
+  ],
+  june: [
+    { src: "images/june/1.mp4", date: "2026-06-01", caption: "video" },
+    { src: "images/june/1.1.mp4", date: "2026-06-01", caption: "video" },
+    { src: "images/june/2.mp4", date: "2026-06-02", caption: "video" },
+    { src: "images/june/4.mp4", date: "2026-06-04", caption: "video" },
+  ],
+  july: [
+    { src: "images/july/1.mp4", date: "2026-07-01", caption: "video" },
+    { src: "images/july/1.3.jpg", date: "2026-07-01", caption: "photo" },
+    { src: "images/july/8.mp4", date: "2026-07-08", caption: "video" },
+    { src: "images/july/14.mp4", date: "2026-07-14", caption: "video" },
+    { src: "images/july/17.mp4", date: "2026-07-17", caption: "video" },
+    { src: "images/july/17.jpg", date: "2026-07-17", caption: "photo" },
+    { src: "images/july/17.2.jpg", date: "2026-07-17", caption: "photo" },
+    { src: "images/july/18.mp4", date: "2026-07-18", caption: "video" },
+    { src: "images/july/18.2.mp4", date: "2026-07-18", caption: "video" },
+    { src: "images/july/18.3.mp4", date: "2026-07-18", caption: "video" },
+    { src: "images/july/22.mp4", date: "2026-07-22", caption: "video" },
+    { src: "images/july/22.2.mp4", date: "2026-07-22", caption: "video" },
+    { src: "images/july/29.mp4", date: "2026-07-29", caption: "video" },
+  ],
+  august: [
+    { src: "images/august/1.1.mp4", date: "2026-08-01", caption: "video" },
+    { src: "images/august/8.mp4", date: "2026-08-08", caption: "video" },
+    { src: "images/august/8.2.mp4", date: "2026-08-08", caption: "video" },
+    { src: "images/august/13.mp4", date: "2026-08-13", caption: "video" },
+    { src: "images/august/14.mp4", date: "2026-08-14", caption: "video" },
+    { src: "images/august/15.mp4", date: "2026-08-15", caption: "video" },
+  ],
   september: [],
   october: [],
 };
 
 const SCREENSHOTS = {
   april: [],
-  may: [],
+  may: [
+    { src: "images/screenshot/Screenshot_2026-05-11-07-44-05-340_com.instagram.android (2).jpg", date: "2026-05-11", caption: "instagram screenshot" },
+  ],
   june: [],
   july: [],
   august: [],
   september: [],
-  october: [],
+  october: [
+    { src: "images/screenshot/photo_2026-09-18_17-59-29.jpg", date: "2026-09-18", caption: "screenshot" },
+    { src: "images/screenshot/photo_2026-09-18_17-59-39.jpg", date: "2026-09-18", caption: "screenshot" },
+    { src: "images/screenshot/photo_2026-09-18_17-59-45.jpg", date: "2026-09-18", caption: "screenshot" },
+  ],
 };
 
-let selectedMonth = "april";
-let ssSelectedMonth = "april";
+let selectedMonth = null;
+let ssSelectedMonth = null;
 
 /* ---------- everything below just works ---------- */
 
@@ -86,7 +165,7 @@ function tryUnlock() {
     $("gift").hidden = false;
     celebrate();
   } else {
-    $("gateError").textContent = "Hmm, try again - it means a lot that you remember.";
+    $("gateError").textContent = "bemn nbr yeshegnewsh? 🤔";
     $("gateAnswer").value = "";
     $("gateAnswer").focus();
   }
@@ -168,9 +247,14 @@ function buildMonthTabs() {
     btn.className = "month-tab" + (m.key === selectedMonth ? " active" : "");
     btn.textContent = m.label;
     btn.addEventListener("click", () => {
-      selectedMonth = m.key;
-      document.querySelectorAll(".month-tab").forEach((b) => b.classList.remove("active"));
-      btn.classList.add("active");
+      if (selectedMonth === m.key) {
+        selectedMonth = null;
+        btn.classList.remove("active");
+      } else {
+        selectedMonth = m.key;
+        document.querySelectorAll("#month-tabs .month-tab").forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+      }
       buildGallery();
     });
     tabs.appendChild(btn);
@@ -180,6 +264,10 @@ function buildMonthTabs() {
 function buildGallery() {
   const grid = $("gallery-grid");
   grid.innerHTML = "";
+  if (!selectedMonth) {
+    grid.innerHTML = '<p class="empty-note">Tap a month above to browse memories.</p>';
+    return;
+  }
   const list = (MEMORIES[selectedMonth] || []).slice().sort((a, b) => a.date.localeCompare(b.date));
   if (!list.length) {
     grid.innerHTML = '<p class="empty-note">No memories in this month yet.</p>';
@@ -262,7 +350,7 @@ function openLetter() {
   if (!card.hidden) return;
   card.innerHTML = CONFIG.letter
     .map((p) => "<p>" + esc(p) + "</p>")
-    .join("") + '<p class="signature">\u2014 with love, ' + esc(CONFIG.yourName) + "</p>";
+    .join("") + '<p class="signature">\u2014 With love, always \uD83C\uDF19</p>';
   card.hidden = false;
   setTimeout(() => card.scrollIntoView({ behavior: "smooth", block: "center" }), 350);
 }
@@ -330,9 +418,14 @@ function buildSSMonthTabs() {
     btn.className = "month-tab" + (m.key === ssSelectedMonth ? " active" : "");
     btn.textContent = m.label;
     btn.addEventListener("click", () => {
-      ssSelectedMonth = m.key;
-      tabs.querySelectorAll(".month-tab").forEach((b) => b.classList.remove("active"));
-      btn.classList.add("active");
+      if (ssSelectedMonth === m.key) {
+        ssSelectedMonth = null;
+        btn.classList.remove("active");
+      } else {
+        ssSelectedMonth = m.key;
+        tabs.querySelectorAll(".month-tab").forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+      }
       buildScreenshots();
     });
     tabs.appendChild(btn);
@@ -343,6 +436,10 @@ function buildScreenshots() {
   const grid = $("ss-grid");
   if (!grid) return;
   grid.innerHTML = "";
+  if (!ssSelectedMonth) {
+    grid.innerHTML = '<p class="empty-note">Tap a month above to browse screenshots.</p>';
+    return;
+  }
   const list = (SCREENSHOTS[ssSelectedMonth] || []).slice().sort((a, b) => a.date.localeCompare(b.date));
   if (!list.length) {
     grid.innerHTML = '<p class="empty-note">No screenshots in this month yet.</p>';
